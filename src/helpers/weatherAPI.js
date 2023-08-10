@@ -1,8 +1,8 @@
 // Remova os comentários a medida que for implementando as funções
-
+const myToken = import.meta.env.VITE_TOKEN;
 export const searchCities = async (term) => {
   try {
-    const API_CITY = await fetch(`http://api.weatherapi.com/v1/search.json?lang=pt&key=adc8c4af72734b528fd220507231008&q=${term}`);
+    const API_CITY = await fetch(`http://api.weatherapi.com/v1/search.json?lang=pt&key=${myToken}&q=${term}`);
     const data = await API_CITY.json();
     if (data.length > 0) {
       return data;
@@ -14,6 +14,12 @@ export const searchCities = async (term) => {
   }
 };
 
-export const getWeatherByCity = (/* cityURL */) => {
-//   seu código aqui
+export const getWeatherByCity = async (cityURL) => {
+    const API_WEATHER = await fetch(`http://api.weatherapi.com/v1/current.json?lang=pt&key=${myToken}&q=${cityURL}`);
+    const data = await API_WEATHER.json();
+    return {
+      temp: data.current.temp_c,
+      condition: data.current.condition.text,
+      icon: data.current.condition.icon,
+     };  
 };
