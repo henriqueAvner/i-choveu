@@ -15,11 +15,11 @@ export const searchCities = async (term) => {
 };
 
 export const getWeatherByCity = async (cityURL) => {
-    const API_WEATHER = await fetch(`http://api.weatherapi.com/v1/current.json?lang=pt&key=${myToken}&q=${cityURL}`);
-    const data = await API_WEATHER.json();
-    return {
-      temp: data.current.temp_c,
-      condition: data.current.condition.text,
-      icon: data.current.condition.icon,
-     };  
+  const API_WEATHER = await fetch(`http://api.weatherapi.com/v1/current.json?lang=pt&key=${myToken}&q=${cityURL}`);
+  const data = await API_WEATHER.json();
+  return {
+    temp: data.current.temp_c,
+    condition: data.current.condition.text,
+    icon: data.current.condition.icon,
+  };
 };

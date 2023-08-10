@@ -117,7 +117,6 @@ export async function handleSearch(event) {
   const searchInput = document.getElementById('search-input');
   const searchValue = searchInput.value;
   const citiesSearch = await searchCities(searchValue);
-  console.log(citiesSearch);
   try {
     await Promise.all(citiesSearch.map((city) => getWeatherByCity(city.url)));
   } catch (err) {
