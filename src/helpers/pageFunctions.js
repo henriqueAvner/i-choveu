@@ -113,12 +113,18 @@ export function createCityElement(cityInfo) {
 export async function handleSearch(event) {
   event.preventDefault();
   clearChildrenById('cities');
+  const cityElement = document.querySelector('#cities');
 
   const searchInput = document.getElementById('search-input');
   const searchValue = searchInput.value;
   const citiesSearch = await searchCities(searchValue);
   try {
-    await Promise.all(citiesSearch.map((city) => getWeatherByCity(city.url)));
+    const requestWeather = await Promise.all(citiesSearch
+      .map((city) => getWeatherByCity(city.url)));
+    requestWeather.forEach((city2) => {
+      const liElement = createCityElement(city2);
+      cityElement.appendChild(liElement);
+    });
   } catch (err) {
     alert(err.message);
   }
